@@ -16,7 +16,7 @@ public class Titulo{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private float codClassificacao;
     private String titulo;
     private String subtitulo;
