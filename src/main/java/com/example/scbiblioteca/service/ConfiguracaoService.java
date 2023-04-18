@@ -1,5 +1,6 @@
 package com.example.scbiblioteca.service;
 
+import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Configuracao;
 import com.example.scbiblioteca.model.repository.ConfiguracaoRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,15 +36,18 @@ public class ConfiguracaoService {
         repository.delete(configuracao);
     }
 
-//    public void validar(Configuracao configuracao) {
-//        if (configuracao.getDocumento() == null || aluno.getMatricula() == 0) {
-//            throw new RegraNegocioException("Matrícula inválida");
-//        }
-//        if (aluno.getNome() == null || aluno.getNome().trim().equals("")) {
-//            throw new RegraNegocioException("Nome inválido");
-//        }
-//        if (aluno.getCurso() == null || aluno.getCurso().getId() == null || aluno.getCurso().getId() == 0) {
-//            throw new RegraNegocioException("Curso inválido");
-//        }
-//    }
+    public void validar(Configuracao configuracao) {
+        if (configuracao.getTipoPrazo() == null || configuracao.getTipoPrazo().trim().equals("")) {
+            throw new RegraNegocioException("Tipo de prazo inválido");
+        }
+        if (configuracao.getPrazoEntregaQuantDias() == null || configuracao.getPrazoEntregaQuantDias().trim().equals("")) {
+            throw new RegraNegocioException("Prazo de entrega inserido inválido");
+        }
+        if (configuracao.getValorMulta() < 0) {
+            throw new RegraNegocioException("Valor de multa não pode ser negativo");
+        }
+        if (configuracao.getQuantMaximaEmprestimo() < 0) {
+            throw new RegraNegocioException("Quantidade máxima de exemplares não pode ser negativa");
+        }
+    }
 }
