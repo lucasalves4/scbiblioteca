@@ -26,7 +26,7 @@ public class ConfiguracaoService {
 
     @Transactional
     public Configuracao salvar(Configuracao configuracao) {
-        //validar(configuracao);
+        validar(configuracao);
         return repository.save(configuracao);
     }
 
