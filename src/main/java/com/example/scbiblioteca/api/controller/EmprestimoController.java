@@ -22,7 +22,7 @@ public class EmprestimoController{
 
     @GetMapping()
     public ResponseEntity get() {
-        List<Emprestimo> emprestimos = service.getEmprestimos();
+        List<Emprestimo> emprestimos = service.getEmprestimo();
         return ResponseEntity.ok(emprestimos.stream().map(EmprestimoDTO::create).collect(Collectors.toList()));
     }
 

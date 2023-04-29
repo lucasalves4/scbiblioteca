@@ -3,12 +3,14 @@ package com.example.scbiblioteca.service;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Exemplar;
 import com.example.scbiblioteca.model.repository.ExemplarRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class ExemplarService {
     private ExemplarRepository repository;
 

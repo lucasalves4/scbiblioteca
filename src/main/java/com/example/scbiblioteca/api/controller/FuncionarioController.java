@@ -2,6 +2,7 @@ package com.example.scbiblioteca.api.controller;
 
 import com.example.scbiblioteca.api.dto.FuncionarioDTO;
 import com.example.scbiblioteca.model.entity.Funcionario;
+import com.example.scbiblioteca.service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

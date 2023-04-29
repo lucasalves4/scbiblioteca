@@ -1,6 +1,6 @@
 package com.example.scbiblioteca.api.controller;
+
 import com.example.scbiblioteca.api.dto.DevolucaoDTO;
-import com.example.scbiblioteca.model.entity.Autor;
 import com.example.scbiblioteca.model.entity.Devolucao;
 import com.example.scbiblioteca.service.DevolucaoService;
 import lombok.RequiredArgsConstructor;

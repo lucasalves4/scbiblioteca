@@ -2,6 +2,7 @@ package com.example.scbiblioteca.api.controller;
 
 import com.example.scbiblioteca.api.dto.ExemplarDTO;
 import com.example.scbiblioteca.model.entity.Exemplar;
+import com.example.scbiblioteca.service.ExemplarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class ExemplarController{
     @GetMapping()
     public ResponseEntity get() {
         List<Exemplar> exemplares = service.getExemplar();
-        return ResponseEntity.ok(exemplar.stream().map(ExemplarDTO::create).collect(Collectors.toList()));
+        return ResponseEntity.ok(exemplares.stream().map(ExemplarDTO::create).collect(Collectors.toList()));
     }
 
 }
