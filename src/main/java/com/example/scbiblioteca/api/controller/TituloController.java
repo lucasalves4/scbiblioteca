@@ -3,6 +3,7 @@ package com.example.scbiblioteca.api.controller;
 import com.example.scbiblioteca.api.dto.DocumentoDTO;
 import com.example.scbiblioteca.model.entity.Documento;
 import com.example.scbiblioteca.model.entity.Titulo;
+import com.example.scbiblioteca.service.TituloService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

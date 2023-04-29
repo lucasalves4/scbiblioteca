@@ -17,7 +17,6 @@ public class Exemplar{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private int numeroTombo;
     private String dataAquisicao;
     private String tipoAquisicao;
