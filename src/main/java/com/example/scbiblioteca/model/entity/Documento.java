@@ -20,5 +20,7 @@ public class Documento{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String tipoDocumento;
+
 }
 
