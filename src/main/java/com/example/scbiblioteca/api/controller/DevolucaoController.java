@@ -4,8 +4,6 @@ import com.example.scbiblioteca.api.dto.DevolucaoDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Devolucao;
 import com.example.scbiblioteca.model.entity.Emprestimo;
-import com.example.scbiblioteca.service.ConfiguracaoService;
-import com.example.scbiblioteca.service.DocumentoService;
 import com.example.scbiblioteca.service.EmprestimoService;
 import com.example.scbiblioteca.service.DevolucaoService;
 import lombok.RequiredArgsConstructor;
@@ -85,7 +83,7 @@ public class DevolucaoController {
         ModelMapper modelMapper = new ModelMapper();
         Devolucao devolucao = modelMapper.map(dto, Devolucao.class);
         if (dto.getIdEmprestimo() != null) {
-            Optional<Emprestimo> emprestimo = emprestimoService.getEmprestimoById(dto.getIdEmprestimo);
+            Optional<Emprestimo> emprestimo = emprestimoService.getEmprestimoById(dto.getIdEmprestimo());
             if (!emprestimo.isPresent()) {
                 devolucao.setEmprestimo(null);
             } else {
