@@ -37,6 +37,23 @@ public class AutorController {
         return ResponseEntity.ok(autor.map(AutorDTO::create));
     }
 
+    @PostMapping()
+    public ResponseEntity post(AutorDTO dto) {
+        try {
+            Autor autor = converter(dto);
+            autor = service.salvar(autor);
+            return new ResponseEntity(autor, HttpStatus.CREATED);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    public Autor converter(AutorDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        Autor autor = modelMapper.map(dto, Autor.class);
+        return autor;
+    }
+
 //    @PostMapping()
 //    public ResponseEntity post(AutorDTO dto) {
 //        try {
