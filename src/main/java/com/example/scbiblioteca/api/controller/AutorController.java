@@ -53,39 +53,4 @@ public class AutorController {
         Autor autor = modelMapper.map(dto, Autor.class);
         return autor;
     }
-
-//    @PostMapping()
-//    public ResponseEntity post(AutorDTO dto) {
-//        try {
-//            Autor autor = converter(dto);
-//            autor = autorService.salvar(autor.getNome());
-//            autor.setNome(endereco);
-//            autor = service.salvar(autor);
-//            return new ResponseEntity(autor, HttpStatus.CREATED);
-//        } catch (RegraNegocioException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
-//
-//
-//    public Autor converter(AutorDTO dto) {
-//        ModelMapper modelMapper = new ModelMapper();
-//        Autor autor = modelMapper.map(dto, Autor.class);
-//        autor.setNome(autor);
-//        if (dto.getNome()!=null){
-//            Optional<Autor> autor = autorService.getAutorById(dto.getId());
-//            if(!id.isPresent)){
-//            autor.setId(null);
-//            }
-//        }
-// //       if (dto.getNome() != null) {
-// //           Optional<Curso> curso = autorService(dto.getIdCurso());
-// //           if (!autor.isPresent()) {
-// //               autor.setNome(null);
-////            } else {
-// //               autor.setNome(curso.get());
-// //           }
-//  //      }
-//        return autor;
-//    }
 }

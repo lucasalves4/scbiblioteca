@@ -12,7 +12,6 @@ import org.modelmapper.ModelMapper;
 public class ConfiguracaoDTO {
 
     private Long id;
-    private String tipoPrazo;
 
     private String prazoEntregaQuantDias;
 
@@ -24,10 +23,11 @@ public class ConfiguracaoDTO {
 
     private boolean permiteReserva;
 
+    private Long idDocumento;
+
     public static ConfiguracaoDTO create(Configuracao configuracao) {
         ModelMapper modelMapper = new ModelMapper();
         ConfiguracaoDTO dto = modelMapper.map(configuracao, ConfiguracaoDTO.class);
-        dto.tipoPrazo = configuracao.getTipoPrazo();
         dto.prazoEntregaQuantDias = configuracao.getPrazoEntregaQuantDias();
         dto.valorMulta = configuracao.getValorMulta();
         if (configuracao.isPermiteRenovar()) dto.permiteRenovar = true;
