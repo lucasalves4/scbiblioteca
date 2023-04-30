@@ -38,9 +38,6 @@ public class ConfiguracaoService {
     }
 
     public void validar(Configuracao configuracao) {
-        if (configuracao.getTipoPrazo() == null || configuracao.getTipoPrazo().trim().equals("")) {
-            throw new RegraNegocioException("Tipo de prazo inválido");
-        }
         if (configuracao.getPrazoEntregaQuantDias() == null || configuracao.getPrazoEntregaQuantDias().trim().equals("")) {
             throw new RegraNegocioException("Prazo de entrega inserido inválido");
         }

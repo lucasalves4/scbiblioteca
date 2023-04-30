@@ -7,6 +7,8 @@ public class DevolucaoDTO {
     private Long id;
     private String dataDevolucao;
 
+    private Long idEmprestimo;
+
     public static DevolucaoDTO create(Devolucao devolucao) {
         ModelMapper modelMapper = new ModelMapper();
         DevolucaoDTO dto = modelMapper.map(devolucao, DevolucaoDTO.class);

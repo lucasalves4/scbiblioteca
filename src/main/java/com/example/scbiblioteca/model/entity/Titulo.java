@@ -28,7 +28,7 @@ public class Titulo{
     private String editora;
     private String dataPublicacao;
     private String idioma;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Documento documento;
     @ManyToOne(cascade = CascadeType.ALL)
     private Autor autor;
