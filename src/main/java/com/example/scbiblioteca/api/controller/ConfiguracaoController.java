@@ -51,6 +51,35 @@ public class ConfiguracaoController{
         }
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity atualizar(@PathVariable("id") Long id, ConfiguracaoDTO dto) {
+        if (!service.getConfiguracaoById(id).isPresent()) {
+            return new ResponseEntity("Configuracao não encontrada", HttpStatus.NOT_FOUND);
+        }
+        try {
+            Configuracao configuracao = converter(dto);
+            configuracao.setId(id);
+            service.salvar(configuracao);
+            return ResponseEntity.ok(configuracao);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluir(@PathVariable("id") Long id) {
+        Optional<Configuracao> configuracao = service.getConfiguracaoById(id);
+        if (!configuracao.isPresent()) {
+            return new ResponseEntity("Configuração não encontrada", HttpStatus.NOT_FOUND);
+        }
+        try {
+            service.excluir(configuracao.get());
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     public Configuracao converter(ConfiguracaoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Configuracao configuracao = modelMapper.map(dto, Configuracao.class);
