@@ -18,6 +18,7 @@ public class Renovacao{
     private Long id;
 
     private int quantidadeDias;
+
     private String dataRenovacao;
 
     @ManyToOne(cascade = CascadeType.ALL)

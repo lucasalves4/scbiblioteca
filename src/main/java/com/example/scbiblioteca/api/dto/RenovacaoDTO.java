@@ -1,8 +1,14 @@
 package com.example.scbiblioteca.api.dto;
 
 import com.example.scbiblioteca.model.entity.Renovacao;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RenovacaoDTO {
 
     private Long id;
