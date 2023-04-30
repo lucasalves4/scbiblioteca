@@ -1,10 +1,8 @@
 package com.example.scbiblioteca.api.controller;
 
 import com.example.scbiblioteca.api.dto.AutorDTO;
-import com.example.scbiblioteca.api.dto.ConfiguracaoDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Autor;
-import com.example.scbiblioteca.model.entity.Configuracao;
 import com.example.scbiblioteca.service.AutorService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
