@@ -85,14 +85,14 @@ public class ExemplarController{
     public Exemplar converter(ExemplarDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Exemplar exemplar = modelMapper.map(dto, Exemplar.class);
-//        if (dto.getIdEmprestimo() != null) {
-//            Optional<Emprestimo> emprestimo = emprestimoService.getEmprestimoById(dto.getIdEmprestimo());
-//            if (!emprestimo.isPresent()) {
-//                exemplar.setEmprestimo(null);
-//            } else {
-//                exemplar.setEmprestimo(emprestimo.get());
-//            }
-//        }
+        if (dto.getIdEmprestimo() != null) {
+            Optional<Emprestimo> emprestimo = emprestimoService.getEmprestimoById(dto.getIdEmprestimo());
+            if (!emprestimo.isPresent()) {
+                exemplar.setEmprestimo(null);
+            } else {
+                exemplar.setEmprestimo(emprestimo.get());
+            }
+        }
         return exemplar;
     }
 }
