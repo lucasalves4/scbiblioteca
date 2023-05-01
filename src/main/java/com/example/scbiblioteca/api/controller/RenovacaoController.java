@@ -1,17 +1,16 @@
 package com.example.scbiblioteca.api.controller;
 
-import com.example.scbiblioteca.api.dto.ConfiguracaoDTO;
 import com.example.scbiblioteca.api.dto.RenovacaoDTO;
-import com.example.scbiblioteca.model.entity.Configuracao;
+import com.example.scbiblioteca.exception.RegraNegocioException;
+import com.example.scbiblioteca.model.entity.Emprestimo;
+import com.example.scbiblioteca.service.EmprestimoService;
 import com.example.scbiblioteca.model.entity.Renovacao;
 import com.example.scbiblioteca.service.RenovacaoService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +23,8 @@ import java.util.stream.Collectors;
 public class RenovacaoController{
 
     private final RenovacaoService service;
+    private final EmprestimoService emprestimoService;
+
 
     @GetMapping()
     public ResponseEntity get() {
@@ -37,6 +38,60 @@ public class RenovacaoController{
             return new ResponseEntity("Renovação não encontrada", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(renovacao.map(RenovacaoDTO::create));
+    }
+
+    @PostMapping()
+    public ResponseEntity post(@RequestBody RenovacaoDTO dto) {
+        try {
+            Renovacao renovacao = converter(dto);
+            renovacao = service.salvar(renovacao);
+            return new ResponseEntity(renovacao, HttpStatus.CREATED);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody RenovacaoDTO dto) {
+        if (!service.getRenovacaoById(id).isPresent()) {
+            return new ResponseEntity("Renovação não encontrada", HttpStatus.NOT_FOUND);
+        }
+        try {
+            Renovacao renovacao = converter(dto);
+            renovacao.setId(id);
+            service.salvar(renovacao);
+            return ResponseEntity.ok(renovacao);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluir(@PathVariable("id") Long id) {
+        Optional<Renovacao> renovacao = service.getRenovacaoById(id);
+        if (!renovacao.isPresent()) {
+            return new ResponseEntity("Renovação não encontrada", HttpStatus.NOT_FOUND);
+        }
+        try {
+            service.excluir(renovacao.get());
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    public Renovacao converter(RenovacaoDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        Renovacao renovacao = modelMapper.map(dto, Renovacao.class);
+        if (dto.getIdEmprestimo() != null) {
+            Optional<Emprestimo> emprestimo = emprestimoService.getEmprestimoById(dto.getIdEmprestimo());
+            if (!emprestimo.isPresent()) {
+                renovacao.setEmprestimo(null);
+            } else {
+                renovacao.setEmprestimo(emprestimo.get());
+            }
+        }
+        return renovacao;
     }
 
 }

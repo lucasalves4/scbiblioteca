@@ -39,5 +39,11 @@ public class ReservaService {
     }
 
     public void validar(Reserva reserva) {
+        if(reserva.getExemplar() == null || reserva.getExemplar().equals("")) {
+            throw new RegraNegocioException("Exemplar inválido");
+        }
+        if(reserva.getFuncionario() == null || reserva.getFuncionario().equals("")) {
+            throw new RegraNegocioException("Funcionário inválido");
+        }
         }
 }

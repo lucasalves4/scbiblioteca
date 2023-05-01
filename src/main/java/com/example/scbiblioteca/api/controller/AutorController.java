@@ -38,11 +38,39 @@ public class AutorController {
     }
 
     @PostMapping()
-    public ResponseEntity post(AutorDTO dto) {
+    public ResponseEntity post(@RequestBody AutorDTO dto) {
         try {
             Autor autor = converter(dto);
             autor = service.salvar(autor);
             return new ResponseEntity(autor, HttpStatus.CREATED);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PutMapping("{id}")
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody AutorDTO dto) {
+        if (!service.getAutorById(id).isPresent()) {
+            return new ResponseEntity("Autor não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            Autor autor = converter(dto);
+            autor.setId(id);
+            service.salvar(autor);
+            return ResponseEntity.ok(autor);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluir(@PathVariable("id") Long id) {
+        Optional<Autor> autor = service.getAutorById(id);
+        if (!autor.isPresent()) {
+            return new ResponseEntity("Autor não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            service.excluir(autor.get());
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

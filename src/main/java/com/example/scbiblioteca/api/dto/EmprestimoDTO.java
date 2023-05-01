@@ -1,8 +1,14 @@
 package com.example.scbiblioteca.api.dto;
 
-import com.example.scbiblioteca.model.entity.*;
+import com.example.scbiblioteca.model.entity.Emprestimo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmprestimoDTO {
     private Long id;
     private Long idLeitor;
