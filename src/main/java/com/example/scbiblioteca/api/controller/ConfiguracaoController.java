@@ -41,7 +41,7 @@ public class ConfiguracaoController{
     }
 
     @PostMapping()
-    public ResponseEntity post(ConfiguracaoDTO dto) {
+    public ResponseEntity post(@RequestBody ConfiguracaoDTO dto) {
         try {
             Configuracao configuracao = converter(dto);
             configuracao = service.salvar(configuracao);
@@ -52,7 +52,7 @@ public class ConfiguracaoController{
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, ConfiguracaoDTO dto) {
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody ConfiguracaoDTO dto) {
         if (!service.getConfiguracaoById(id).isPresent()) {
             return new ResponseEntity("Configuracao não encontrada", HttpStatus.NOT_FOUND);
         }

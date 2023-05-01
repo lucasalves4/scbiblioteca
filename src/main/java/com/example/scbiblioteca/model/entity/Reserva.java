@@ -15,8 +15,12 @@ import lombok.NoArgsConstructor;
 public class Reserva{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Funcionario funcionario;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Exemplar exemplar;
 
 }
 

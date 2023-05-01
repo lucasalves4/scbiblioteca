@@ -1,12 +1,10 @@
 package com.example.scbiblioteca.api.controller;
 
-import com.example.scbiblioteca.api.dto.ConfiguracaoDTO;
-import com.example.scbiblioteca.api.dto.FuncionarioDTO;
 import com.example.scbiblioteca.api.dto.LeitorDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
-import com.example.scbiblioteca.model.entity.Configuracao;
-import com.example.scbiblioteca.model.entity.Funcionario;
+import com.example.scbiblioteca.model.entity.Endereco;
 import com.example.scbiblioteca.model.entity.Leitor;
+import com.example.scbiblioteca.service.EnderecoService;
 import com.example.scbiblioteca.service.LeitorService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -25,6 +23,7 @@ import java.util.stream.Collectors;
 public class LeitorController{
 
     private final LeitorService service;
+    private final EnderecoService enderecoService;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -41,9 +40,11 @@ public class LeitorController{
     }
 
     @PostMapping()
-    public ResponseEntity post(LeitorDTO dto) {
+    public ResponseEntity post(@RequestBody LeitorDTO dto) {
         try {
             Leitor leitor = converter(dto);
+            Endereco endereco = enderecoService.salvar(leitor.getEndereco());
+            leitor.setEndereco(endereco);
             leitor = service.salvar(leitor);
             return new ResponseEntity(leitor, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
@@ -51,13 +52,15 @@ public class LeitorController{
         }
     }
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, LeitorDTO dto) {
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody LeitorDTO dto) {
         if (!service.getLeitorById(id).isPresent()) {
             return new ResponseEntity("Leitor não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
             Leitor leitor = converter(dto);
             leitor.setId(id);
+            Endereco endereco = enderecoService.salvar(leitor.getEndereco());
+            leitor.setEndereco(endereco);
             service.salvar(leitor);
             return ResponseEntity.ok(leitor);
         } catch (RegraNegocioException e) {
@@ -82,6 +85,8 @@ public class LeitorController{
     public Leitor converter(LeitorDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Leitor leitor = modelMapper.map(dto, Leitor.class);
+        Endereco endereco = modelMapper.map(dto, Endereco.class);
+        leitor.setEndereco(endereco);
         return leitor;
     }
 

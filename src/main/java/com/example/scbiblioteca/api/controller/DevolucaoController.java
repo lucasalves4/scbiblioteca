@@ -40,7 +40,7 @@ public class DevolucaoController {
     }
 
     @PostMapping()
-    public ResponseEntity post(DevolucaoDTO dto) {
+    public ResponseEntity post(@RequestBody DevolucaoDTO dto) {
         try {
             Devolucao devolucao = converter(dto);
             devolucao = service.salvar(devolucao);
@@ -51,7 +51,7 @@ public class DevolucaoController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, DevolucaoDTO dto) {
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody DevolucaoDTO dto) {
         if (!service.getDevolucaoById(id).isPresent()) {
             return new ResponseEntity("Devolução não encontrada", HttpStatus.NOT_FOUND);
         }

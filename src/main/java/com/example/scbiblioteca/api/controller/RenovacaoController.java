@@ -41,7 +41,7 @@ public class RenovacaoController{
     }
 
     @PostMapping()
-    public ResponseEntity post(RenovacaoDTO dto) {
+    public ResponseEntity post(@RequestBody RenovacaoDTO dto) {
         try {
             Renovacao renovacao = converter(dto);
             renovacao = service.salvar(renovacao);
@@ -52,7 +52,7 @@ public class RenovacaoController{
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, RenovacaoDTO dto) {
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody RenovacaoDTO dto) {
         if (!service.getRenovacaoById(id).isPresent()) {
             return new ResponseEntity("Renovação não encontrada", HttpStatus.NOT_FOUND);
         }

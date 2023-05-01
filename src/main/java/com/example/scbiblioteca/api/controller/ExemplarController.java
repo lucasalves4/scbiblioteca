@@ -4,8 +4,9 @@ import com.example.scbiblioteca.api.dto.ExemplarDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Emprestimo;
 import com.example.scbiblioteca.model.entity.Exemplar;
+import com.example.scbiblioteca.service.EmprestimoService;
 import com.example.scbiblioteca.service.ExemplarService;
-import com.example.scbiblioteca.model.entity.Reserva;
+import com.example.scbiblioteca.service.ReservaService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,8 @@ import java.util.stream.Collectors;
 public class ExemplarController{
 
     private final ExemplarService service;
+    private final EmprestimoService emprestimoService;
+    private final ReservaService reservaService;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -34,54 +37,54 @@ public class ExemplarController{
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<Exemplar> exemplar = service.getExemplarById(id);
         if (!exemplar.isPresent()) {
-            return new ResponseEntity("Endereço não encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Exemplar não encontrado", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(exemplar.map(ExemplarDTO::create));
     }
 
-//    @PostMapping()
-//    public ResponseEntity post(ExemplarDTO dto) {
-//        try {
-//            Exemplar exemplar = converter(dto);
-//            exemplar = service.salvar(exemplar);
-//            return new ResponseEntity(exemplar, HttpStatus.CREATED);
-//        } catch (RegraNegocioException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
-//
-//    @PutMapping("{id}")
-//    public ResponseEntity atualizar(@PathVariable("id") Long id, ExemplarDTO dto) {
-//        if (!service.getExemplarById(id).isPresent()) {
-//            return new ResponseEntity("Exemplar não encontrado", HttpStatus.NOT_FOUND);
-//        }
-//        try {
-//            Exemplar exemplar = converter(dto);
-//            exemplar.setId(id);
-//            service.salvar(exemplar);
-//            return ResponseEntity.ok(exemplar);
-//        } catch (RegraNegocioException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
-//
-//    @DeleteMapping("{id}")
-//    public ResponseEntity excluir(@PathVariable("id") Long id) {
-//        Optional<Exemplar> exemplar = service.getExemplarById(id);
-//        if (!exemplar.isPresent()) {
-//            return new ResponseEntity("Exemplar não encontrado", HttpStatus.NOT_FOUND);
-//        }
-//        try {
-//            service.excluir(exemplar.get());
-//            return new ResponseEntity(HttpStatus.NO_CONTENT);
-//        } catch (RegraNegocioException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
-//
-//    public Exemplar converter(ExemplarDTO dto) {
-//        ModelMapper modelMapper = new ModelMapper();
-//        Exemplar exemplar = modelMapper.map(dto, Exemplar.class);
+    @PostMapping()
+    public ResponseEntity post(@RequestBody ExemplarDTO dto) {
+        try {
+            Exemplar exemplar = converter(dto);
+            exemplar = service.salvar(exemplar);
+            return new ResponseEntity(exemplar, HttpStatus.CREATED);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody ExemplarDTO dto) {
+        if (!service.getExemplarById(id).isPresent()) {
+            return new ResponseEntity("Exemplar não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            Exemplar exemplar = converter(dto);
+            exemplar.setId(id);
+            service.salvar(exemplar);
+            return ResponseEntity.ok(exemplar);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluir(@PathVariable("id") Long id) {
+        Optional<Exemplar> exemplar = service.getExemplarById(id);
+        if (!exemplar.isPresent()) {
+            return new ResponseEntity("Exemplar não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            service.excluir(exemplar.get());
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    public Exemplar converter(ExemplarDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        Exemplar exemplar = modelMapper.map(dto, Exemplar.class);
 //        if (dto.getIdEmprestimo() != null) {
 //            Optional<Emprestimo> emprestimo = emprestimoService.getEmprestimoById(dto.getIdEmprestimo());
 //            if (!emprestimo.isPresent()) {
@@ -90,14 +93,6 @@ public class ExemplarController{
 //                exemplar.setEmprestimo(emprestimo.get());
 //            }
 //        }
-//        if (dto.getIdReserva() != null) {
-//            Optional<Reserva> reserva = reservaService.getReservaById(dto.getIdReserva());
-//            if (!reserva.isPresent()) {
-//                exemplar.setReserva(null);
-//            } else {
-//                exemplar.setReserva(reserva.get());
-//            }
-//        }
-//        return exemplar;
-//    }
+        return exemplar;
+    }
 }

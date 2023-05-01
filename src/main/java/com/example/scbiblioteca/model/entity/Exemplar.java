@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Exemplar{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int numeroTombo;
     private String dataAquisicao;
@@ -24,9 +24,6 @@ public class Exemplar{
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Emprestimo emprestimo;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Reserva reserva;
 }
 
 

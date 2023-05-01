@@ -1,9 +1,10 @@
 package com.example.scbiblioteca.api.controller;
 
-import com.example.scbiblioteca.api.dto.AutorDTO;
 import com.example.scbiblioteca.api.dto.FuncionarioDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
+import com.example.scbiblioteca.model.entity.Endereco;
 import com.example.scbiblioteca.model.entity.Funcionario;
+import com.example.scbiblioteca.service.EnderecoService;
 import com.example.scbiblioteca.service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class FuncionarioController{
 
     private final FuncionarioService service;
+    private final EnderecoService enderecoService;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -38,9 +40,11 @@ public class FuncionarioController{
     }
 
     @PostMapping()
-    public ResponseEntity post(FuncionarioDTO dto) {
+    public ResponseEntity post(@RequestBody FuncionarioDTO dto) {
         try {
             Funcionario funcionario = converter(dto);
+            Endereco endereco = enderecoService.salvar(funcionario.getEndereco());
+            funcionario.setEndereco(endereco);
             funcionario = service.salvar(funcionario);
             return new ResponseEntity(funcionario, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
@@ -48,13 +52,15 @@ public class FuncionarioController{
         }
     }
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, FuncionarioDTO dto) {
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody FuncionarioDTO dto) {
         if (!service.getFuncionarioById(id).isPresent()) {
             return new ResponseEntity("Funcionário não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
             Funcionario funcionario = converter(dto);
             funcionario.setId(id);
+            Endereco endereco = enderecoService.salvar(funcionario.getEndereco());
+            funcionario.setEndereco(endereco);
             service.salvar(funcionario);
             return ResponseEntity.ok(funcionario);
         } catch (RegraNegocioException e) {
@@ -79,6 +85,8 @@ public class FuncionarioController{
     public Funcionario converter(FuncionarioDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Funcionario funcionario = modelMapper.map(dto, Funcionario.class);
+        Endereco endereco = modelMapper.map(dto, Endereco.class);
+        funcionario.setEndereco(endereco);
         return funcionario;
     }
 

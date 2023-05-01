@@ -38,7 +38,7 @@ public class AutorController {
     }
 
     @PostMapping()
-    public ResponseEntity post(AutorDTO dto) {
+    public ResponseEntity post(@RequestBody AutorDTO dto) {
         try {
             Autor autor = converter(dto);
             autor = service.salvar(autor);
@@ -48,7 +48,7 @@ public class AutorController {
         }
     }
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, AutorDTO dto) {
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody AutorDTO dto) {
         if (!service.getAutorById(id).isPresent()) {
             return new ResponseEntity("Autor não encontrado", HttpStatus.NOT_FOUND);
         }

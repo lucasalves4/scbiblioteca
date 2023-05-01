@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Titulo{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private float codClassificacao;
     private String titulo;

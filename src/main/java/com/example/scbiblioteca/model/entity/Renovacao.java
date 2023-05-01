@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Renovacao{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int quantidadeDias;

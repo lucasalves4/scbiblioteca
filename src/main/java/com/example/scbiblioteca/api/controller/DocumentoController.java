@@ -38,7 +38,7 @@ public class DocumentoController{
         return ResponseEntity.ok(documento.map(DocumentoDTO::create));
     }
     @PostMapping()
-    public ResponseEntity post(DocumentoDTO dto) {
+    public ResponseEntity post(@RequestBody DocumentoDTO dto) {
         try {
             Documento documento = converter(dto);
             documento = service.salvar(documento);
@@ -48,7 +48,7 @@ public class DocumentoController{
         }
     }
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, DocumentoDTO dto) {
+    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody DocumentoDTO dto) {
         if (!service.getDocumentoById(id).isPresent()) {
             return new ResponseEntity("Documento não encontrado", HttpStatus.NOT_FOUND);
         }
