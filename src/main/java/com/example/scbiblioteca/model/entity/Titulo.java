@@ -1,6 +1,6 @@
 package com.example.scbiblioteca.model.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,9 +28,9 @@ public class Titulo{
     private String editora;
     private String dataPublicacao;
     private String idioma;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Documento documento;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Autor autor;
 
 }

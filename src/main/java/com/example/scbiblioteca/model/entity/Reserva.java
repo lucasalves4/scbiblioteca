@@ -1,6 +1,6 @@
 package com.example.scbiblioteca.model.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,9 +17,9 @@ public class Reserva{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Funcionario funcionario;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Exemplar exemplar;
 
 }

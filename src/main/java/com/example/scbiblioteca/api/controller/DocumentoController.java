@@ -4,13 +4,16 @@ import com.example.scbiblioteca.api.dto.DocumentoDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Documento;
 import com.example.scbiblioteca.service.DocumentoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/documentos")
 @RequiredArgsConstructor
+@Api("API de Documentos")
+
 
 public class DocumentoController{
 
@@ -30,6 +35,17 @@ public class DocumentoController{
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Obter detalhes de um Documento")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Documento encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Documento não encontrado"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<Documento> documento = service.getDocumentoById(id);
         if (!documento.isPresent()) {
@@ -38,6 +54,17 @@ public class DocumentoController{
         return ResponseEntity.ok(documento.map(DocumentoDTO::create));
     }
     @PostMapping()
+    @ApiOperation("Adiciona um novo documento")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Documento criado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao criar o documento"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity post(@RequestBody DocumentoDTO dto) {
         try {
             Documento documento = converter(dto);
@@ -48,6 +75,17 @@ public class DocumentoController{
         }
     }
     @PutMapping("{id}")
+    @ApiOperation("Edita um documento")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Documento editado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao editar o documento"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody DocumentoDTO dto) {
         if (!service.getDocumentoById(id).isPresent()) {
             return new ResponseEntity("Documento não encontrado", HttpStatus.NOT_FOUND);
@@ -63,6 +101,17 @@ public class DocumentoController{
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Excluir um documento")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao deletar o documento"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Documento> documento = service.getDocumentoById(id);
         if (!documento.isPresent()) {

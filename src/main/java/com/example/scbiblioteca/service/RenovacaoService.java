@@ -45,5 +45,8 @@ public class RenovacaoService {
         if(renovacao.getDataRenovacao() == null || renovacao.getDataRenovacao().trim().equals("")) {
             throw new RegraNegocioException("Data inválida");
         }
+        if(renovacao.getEmprestimo() == null || renovacao.getEmprestimo().equals("")) {
+            throw new RegraNegocioException("Empréstimo inválido");
+        }
     }
 }

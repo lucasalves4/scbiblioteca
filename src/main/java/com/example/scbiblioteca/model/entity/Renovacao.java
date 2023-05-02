@@ -1,6 +1,6 @@
 package com.example.scbiblioteca.model.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class Renovacao{
 
     private String dataRenovacao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Emprestimo emprestimo;
 }
 

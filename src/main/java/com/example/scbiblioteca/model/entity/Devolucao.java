@@ -1,6 +1,6 @@
 package com.example.scbiblioteca.model.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 public class Devolucao{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String dataDevolucao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Emprestimo emprestimo;
 }
 

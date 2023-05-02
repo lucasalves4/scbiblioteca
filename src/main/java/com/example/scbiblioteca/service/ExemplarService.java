@@ -42,8 +42,5 @@ public class ExemplarService {
         if (exemplar.getNumeroTombo() <= 0) {
             throw new RegraNegocioException("Número de tombo não pode ser menor ou igual a zero");
         }
-        if(exemplar.getEmprestimo() == null || exemplar.getEmprestimo().equals("")) {
-            throw new RegraNegocioException("Empréstimo inválido");
-        }
     }
 }

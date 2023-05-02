@@ -1,8 +1,6 @@
 package com.example.scbiblioteca.api.dto;
 
-import com.example.scbiblioteca.model.entity.Emprestimo;
 import com.example.scbiblioteca.model.entity.Exemplar;
-import com.example.scbiblioteca.model.entity.Reserva;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +15,6 @@ public class ExemplarDTO {
     private String dataAquisicao;
     private String tipoAquisicao;
     private float valor;
-    private Emprestimo idEmprestimo;
 
     public static ExemplarDTO create(Exemplar exemplar) {
         ModelMapper modelMapper = new ModelMapper();

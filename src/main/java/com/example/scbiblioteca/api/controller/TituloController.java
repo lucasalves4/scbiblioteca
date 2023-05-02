@@ -1,15 +1,17 @@
 package com.example.scbiblioteca.api.controller;
 
-import com.example.scbiblioteca.api.dto.ConfiguracaoDTO;
 import com.example.scbiblioteca.api.dto.TituloDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Autor;
-import com.example.scbiblioteca.model.entity.Configuracao;
 import com.example.scbiblioteca.model.entity.Documento;
 import com.example.scbiblioteca.model.entity.Titulo;
 import com.example.scbiblioteca.service.AutorService;
 import com.example.scbiblioteca.service.DocumentoService;
 import com.example.scbiblioteca.service.TituloService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/titulos")
 @RequiredArgsConstructor
+@Api("API de Títulos")
+
 
 public class TituloController{
 
@@ -37,6 +41,17 @@ public class TituloController{
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Obter detalhes de um título")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Título encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Título não encontrado"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<Titulo> titulo = service.getTituloById(id);
         if (!titulo.isPresent()) {
@@ -46,6 +61,18 @@ public class TituloController{
     }
 
     @PostMapping()
+    @ApiOperation("Adiciona uma nova título")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Título criado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao criar o título"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+
+    })
     public ResponseEntity post(@RequestBody TituloDTO dto) {
         try {
             Titulo titulo = converter(dto);
@@ -57,6 +84,17 @@ public class TituloController{
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Edita um novo título")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Título editado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao editar o título"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody TituloDTO dto) {
         if (!service.getTituloById(id).isPresent()) {
             return new ResponseEntity("Titulo não encontrada", HttpStatus.NOT_FOUND);
@@ -72,6 +110,17 @@ public class TituloController{
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Excluir um título")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao deletar o título"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Titulo> titulo = service.getTituloById(id);
         if (!titulo.isPresent()) {

@@ -6,6 +6,10 @@ import com.example.scbiblioteca.model.entity.Emprestimo;
 import com.example.scbiblioteca.service.EmprestimoService;
 import com.example.scbiblioteca.model.entity.Renovacao;
 import com.example.scbiblioteca.service.RenovacaoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -19,6 +23,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/renovacoes")
 @RequiredArgsConstructor
+@Api("API de Renovações")
+
 
 public class RenovacaoController{
 
@@ -27,6 +33,17 @@ public class RenovacaoController{
 
 
     @GetMapping()
+    @ApiOperation("Obter detalhes de um renovação")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Renovação encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Renovação não encontrado"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity get() {
         List<Renovacao> renovacoes = service.getRenovacao();
         return ResponseEntity.ok(renovacoes.stream().map(RenovacaoDTO::create).collect(Collectors.toList()));
@@ -41,6 +58,18 @@ public class RenovacaoController{
     }
 
     @PostMapping()
+    @ApiOperation("Adiciona um novo renovação")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Renovação criado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao criar o renovação"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+
+    })
     public ResponseEntity post(@RequestBody RenovacaoDTO dto) {
         try {
             Renovacao renovacao = converter(dto);
@@ -52,6 +81,17 @@ public class RenovacaoController{
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Edita um novo renovação")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Renovação editado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao editar o renovação"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody RenovacaoDTO dto) {
         if (!service.getRenovacaoById(id).isPresent()) {
             return new ResponseEntity("Renovação não encontrada", HttpStatus.NOT_FOUND);
@@ -67,6 +107,17 @@ public class RenovacaoController{
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Excluir um renovação")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao deletar o renovação"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Renovacao> renovacao = service.getRenovacaoById(id);
         if (!renovacao.isPresent()) {
