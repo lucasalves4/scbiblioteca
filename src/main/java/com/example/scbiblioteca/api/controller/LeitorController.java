@@ -57,7 +57,7 @@ public class LeitorController{
     }
 
     @PostMapping()
-    @ApiOperation("Salva um novo leitor")
+    @ApiOperation("Adiciona um novo leitor")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Leitor criado com sucesso"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
@@ -81,7 +81,7 @@ public class LeitorController{
         }
     }
     @PutMapping("{id}")
-    @ApiOperation("Edita um novo leitor")
+    @ApiOperation("Edita um leitor")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Leitor editado com sucesso"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
@@ -109,7 +109,7 @@ public class LeitorController{
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation("Edita um novo leitor")
+    @ApiOperation("Excluir um leitor")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
             @ApiResponse(code = 400, message = "Requisição inválida"),

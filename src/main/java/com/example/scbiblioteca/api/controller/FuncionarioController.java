@@ -57,7 +57,7 @@ public class FuncionarioController{
     }
 
     @PostMapping()
-    @ApiOperation("Salva um novo funcionário")
+    @ApiOperation("Adiciona um novo funcionário")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Funcionário criado com sucesso"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
@@ -80,7 +80,7 @@ public class FuncionarioController{
         }
     }
     @PutMapping("{id}")
-    @ApiOperation("Edita um novo funcionário")
+    @ApiOperation("Edita um funcionário")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Funcionário editado com sucesso"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
@@ -108,7 +108,7 @@ public class FuncionarioController{
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation("Edita um novo funcionário")
+    @ApiOperation("Excluir um funcionário")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
             @ApiResponse(code = 400, message = "Requisição inválida"),

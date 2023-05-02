@@ -7,6 +7,10 @@ import com.example.scbiblioteca.service.EmprestimoService;
 import com.example.scbiblioteca.service.ExemplarService;
 import com.example.scbiblioteca.service.FuncionarioService;
 import com.example.scbiblioteca.service.LeitorService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -20,6 +24,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/emprestimos")
 @RequiredArgsConstructor
+@Api("API de Empréstimos")
+
 
 public class EmprestimoController{
 
@@ -34,6 +40,17 @@ public class EmprestimoController{
         return ResponseEntity.ok(emprestimos.stream().map(EmprestimoDTO::create).collect(Collectors.toList()));
     }
     @GetMapping("/{id}")
+    @ApiOperation("Obter detalhes de um empréstimo")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Empréstimos encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Renovação não empréstimos"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<Emprestimo> emprestimo = service.getEmprestimoById(id);
         if (!emprestimo.isPresent()) {
@@ -43,6 +60,17 @@ public class EmprestimoController{
     }
 
     @PostMapping()
+    @ApiOperation("Adiciona um novo empréstimo")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Empréstimos criado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao criar o empréstimos"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity post(@RequestBody EmprestimoDTO dto) {
         try {
             Emprestimo emprestimo = converter(dto);
@@ -54,6 +82,17 @@ public class EmprestimoController{
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Edita um empréstimo")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Empréstimos editado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao editar o empréstimos"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody EmprestimoDTO dto) {
         if (!service.getEmprestimoById(id).isPresent()) {
             return new ResponseEntity("Empréstimo não encontrado", HttpStatus.NOT_FOUND);
@@ -69,6 +108,17 @@ public class EmprestimoController{
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Excluir um empréstimo")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao deletar o empréstimos"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Emprestimo> emprestimo = service.getEmprestimoById(id);
         if (!emprestimo.isPresent()) {

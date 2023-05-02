@@ -2,11 +2,14 @@ package com.example.scbiblioteca.api.controller;
 
 import com.example.scbiblioteca.api.dto.ExemplarDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
-import com.example.scbiblioteca.model.entity.Emprestimo;
 import com.example.scbiblioteca.model.entity.Exemplar;
 import com.example.scbiblioteca.service.EmprestimoService;
 import com.example.scbiblioteca.service.ExemplarService;
 import com.example.scbiblioteca.service.ReservaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/exemplares")
 @RequiredArgsConstructor
+@Api("API de Exemplares")
+
 
 public class ExemplarController{
 
@@ -34,6 +39,17 @@ public class ExemplarController{
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Obter detalhes de um exemplar")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Exemplar encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Exemplar não encontrado"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<Exemplar> exemplar = service.getExemplarById(id);
         if (!exemplar.isPresent()) {
@@ -43,6 +59,17 @@ public class ExemplarController{
     }
 
     @PostMapping()
+    @ApiOperation("Adiciona um novo exemplar")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Exemplar criado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao criar o exemplar"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity post(@RequestBody ExemplarDTO dto) {
         try {
             Exemplar exemplar = converter(dto);
@@ -54,6 +81,17 @@ public class ExemplarController{
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Edita um exemplar")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Exemplar editado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao editar o exemplar"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody ExemplarDTO dto) {
         if (!service.getExemplarById(id).isPresent()) {
             return new ResponseEntity("Exemplar não encontrado", HttpStatus.NOT_FOUND);
@@ -69,6 +107,17 @@ public class ExemplarController{
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Excluir um exemplar")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao deletar o exemplar"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Exemplar> exemplar = service.getExemplarById(id);
         if (!exemplar.isPresent()) {

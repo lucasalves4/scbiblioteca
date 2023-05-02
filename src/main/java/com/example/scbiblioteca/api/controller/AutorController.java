@@ -54,7 +54,7 @@ public class AutorController {
     }
 
     @PostMapping()
-    @ApiOperation("Salva um novo autor")
+    @ApiOperation("Adiciona um novo autor")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Autor criado com sucesso"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
@@ -75,7 +75,7 @@ public class AutorController {
         }
     }
     @PutMapping("{id}")
-    @ApiOperation("Edita um novo autor")
+    @ApiOperation("Edita um autor")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Autor editado com sucesso"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
@@ -101,7 +101,7 @@ public class AutorController {
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation("Edita um novo autor")
+    @ApiOperation("Excluir um autor")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
             @ApiResponse(code = 400, message = "Requisição inválida"),

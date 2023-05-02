@@ -58,7 +58,7 @@ public class RenovacaoController{
     }
 
     @PostMapping()
-    @ApiOperation("Salva um novo leitor")
+    @ApiOperation("Adiciona um novo leitor")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Renovação criado com sucesso"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
@@ -107,7 +107,7 @@ public class RenovacaoController{
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation("Edita um novo leitor")
+    @ApiOperation("Excluir um leitor")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
             @ApiResponse(code = 400, message = "Requisição inválida"),

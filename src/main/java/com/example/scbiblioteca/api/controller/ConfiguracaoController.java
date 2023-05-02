@@ -57,7 +57,7 @@ public class ConfiguracaoController{
     }
 
     @PostMapping()
-    @ApiOperation("Salva um novo configuração")
+    @ApiOperation("Adiciona uma nova configuração")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Configuração criado com sucesso"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
@@ -105,7 +105,7 @@ public class ConfiguracaoController{
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation("Edita um novo configuração")
+    @ApiOperation("Excluir uma configuração")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
             @ApiResponse(code = 400, message = "Requisição inválida"),

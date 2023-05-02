@@ -61,6 +61,18 @@ public class ReservaController{
     }
 
     @PostMapping()
+    @ApiOperation("Adiciona uma nova reserva")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Reserva criado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao criar o reserva"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+
+    })
     public ResponseEntity post(@RequestBody ReservaDTO dto) {
         try {
             Reserva reserva = converter(dto);
@@ -72,6 +84,17 @@ public class ReservaController{
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Edita um novo reserva")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Reserva editado com sucesso"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao editar o reserva"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody ReservaDTO dto) {
         if (!service.getReservaById(id).isPresent()) {
             return new ResponseEntity("Reserva não encontrada", HttpStatus.NOT_FOUND);
@@ -87,6 +110,17 @@ public class ReservaController{
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Excluir um reserva")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Excluído e nenhum conteúdo foi encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Erro ao deletar o reserva"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Reserva> reserva = service.getReservaById(id);
         if (!reserva.isPresent()) {
