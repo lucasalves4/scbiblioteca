@@ -8,6 +8,10 @@ import com.example.scbiblioteca.model.entity.Titulo;
 import com.example.scbiblioteca.service.AutorService;
 import com.example.scbiblioteca.service.DocumentoService;
 import com.example.scbiblioteca.service.TituloService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -21,6 +25,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/titulos")
 @RequiredArgsConstructor
+@Api("API de Títulos")
+
 
 public class TituloController{
 
@@ -35,6 +41,17 @@ public class TituloController{
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Obter detalhes de um Leitores")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Renovação encontrado"),
+            @ApiResponse(code = 400, message = "Requisição inválida"),
+            @ApiResponse(code = 404, message = "Renovação não encontrado"),
+            @ApiResponse(code = 405, message = "Método não permitido"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor"),
+            @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
+            @ApiResponse(code = 502, message = "Rede indisponível"),
+            @ApiResponse(code = 503, message = "Serviço indisponível")
+    })
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<Titulo> titulo = service.getTituloById(id);
         if (!titulo.isPresent()) {
