@@ -41,11 +41,11 @@ public class TituloController{
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("Obter detalhes de um Leitores")
+    @ApiOperation("Obter detalhes de um título")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Renovação encontrado"),
+            @ApiResponse(code = 200, message = "Título encontrado"),
             @ApiResponse(code = 400, message = "Requisição inválida"),
-            @ApiResponse(code = 404, message = "Renovação não encontrado"),
+            @ApiResponse(code = 404, message = "Título não encontrado"),
             @ApiResponse(code = 405, message = "Método não permitido"),
             @ApiResponse(code = 500, message = "Erro interno do servidor"),
             @ApiResponse(code = 501, message = "Funcionalidade não implementada"),
