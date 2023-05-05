@@ -17,7 +17,7 @@ public class Configuracao{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String prazoEntregaQuantDias;
+    private int prazoEntregaQuantDias;
 
     private float valorMulta;
 

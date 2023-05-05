@@ -47,5 +47,8 @@ public class EmprestimoService {
         if(emprestimo.getFuncionario() == null || emprestimo.getFuncionario().equals("")) {
             throw new RegraNegocioException("Funcionário inválido");
         }
+        if(emprestimo.getDataEmprestimo() == null) {
+            throw new RegraNegocioException("Data de empréstimo inválida");
+        }
     }
 }

@@ -21,6 +21,8 @@ public class Exemplar{
     private String dataAquisicao;
     private String tipoAquisicao;
     private float valor;
+    @ManyToOne
+    private Exemplar exemplar;
 }
 
 
