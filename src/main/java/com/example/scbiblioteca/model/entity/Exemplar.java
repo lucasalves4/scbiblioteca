@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class Exemplar{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private int numeroTombo;
-    private String dataAquisicao;
+    private Date dataAquisicao;
     private String tipoAquisicao;
     private float valor;
     @ManyToOne

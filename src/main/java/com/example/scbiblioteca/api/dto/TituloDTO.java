@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +22,7 @@ public class TituloDTO {
     private String notaSerie;
     private String cidadePublicacao;
     private String editora;
-    private String dataPublicacao;
+    private Date dataPublicacao;
     private String idioma;
     private Long idDocumento;
     private Long idAutor;
