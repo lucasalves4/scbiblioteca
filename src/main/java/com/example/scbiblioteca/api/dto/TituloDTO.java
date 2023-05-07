@@ -16,7 +16,7 @@ public class TituloDTO {
     private float codClassificacao;
     private String titulo;
     private String subtitulo;
-    private  int edicao;
+    private int edicao;
     private String area;
     private int totalPaginas;
     private String notaSerie;

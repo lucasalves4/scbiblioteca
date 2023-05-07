@@ -27,7 +27,5 @@ public class Configuracao{
 
     private boolean permiteReserva;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Documento documento;
 }
 

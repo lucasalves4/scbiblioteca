@@ -17,6 +17,7 @@ public class ExemplarDTO {
     private Date dataAquisicao;
     private String tipoAquisicao;
     private float valor;
+    private Long idTitulo;
 
     public static ExemplarDTO create(Exemplar exemplar) {
         ModelMapper modelMapper = new ModelMapper();

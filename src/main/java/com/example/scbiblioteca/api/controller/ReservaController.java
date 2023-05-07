@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Api("API de Reservas")
 
 
-public class ReservaController{
+public class ReservaController {
 
     private final ReservaService service;
     private final FuncionarioService funcionarioService;

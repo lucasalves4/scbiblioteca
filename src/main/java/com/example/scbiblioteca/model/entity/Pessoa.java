@@ -1,6 +1,7 @@
 package com.example.scbiblioteca.model.entity;
 
 import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

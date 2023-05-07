@@ -3,10 +3,7 @@ package com.example.scbiblioteca.api.controller;
 import com.example.scbiblioteca.api.dto.EmprestimoDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.*;
-import com.example.scbiblioteca.service.EmprestimoService;
-import com.example.scbiblioteca.service.ExemplarService;
-import com.example.scbiblioteca.service.FuncionarioService;
-import com.example.scbiblioteca.service.LeitorService;
+import com.example.scbiblioteca.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,18 +24,20 @@ import java.util.stream.Collectors;
 @Api("API de Empréstimos")
 
 
-public class EmprestimoController{
+public class EmprestimoController {
 
     private final EmprestimoService service;
     private final LeitorService leitorService;
     private final FuncionarioService funcionarioService;
     private final ExemplarService exemplarService;
+    private final DevolucaoService devolucaoService;
 
     @GetMapping()
     public ResponseEntity get() {
         List<Emprestimo> emprestimos = service.getEmprestimo();
         return ResponseEntity.ok(emprestimos.stream().map(EmprestimoDTO::create).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     @ApiOperation("Obter detalhes de um empréstimo")
     @ApiResponses({
@@ -74,6 +73,8 @@ public class EmprestimoController{
     public ResponseEntity post(@RequestBody EmprestimoDTO dto) {
         try {
             Emprestimo emprestimo = converter(dto);
+            Devolucao devolucao = devolucaoService.salvar(emprestimo.getDevolucao());
+            emprestimo.setDevolucao(devolucao);
             emprestimo = service.salvar(emprestimo);
             return new ResponseEntity(emprestimo, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
@@ -100,6 +101,8 @@ public class EmprestimoController{
         try {
             Emprestimo emprestimo = converter(dto);
             emprestimo.setId(id);
+            Devolucao devolucao = devolucaoService.salvar(emprestimo.getDevolucao());
+            emprestimo.setDevolucao(devolucao);
             service.salvar(emprestimo);
             return ResponseEntity.ok(emprestimo);
         } catch (RegraNegocioException e) {
@@ -136,6 +139,8 @@ public class EmprestimoController{
     public Emprestimo converter(EmprestimoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Emprestimo emprestimo = modelMapper.map(dto, Emprestimo.class);
+        Devolucao devolucao = modelMapper.map(dto, Devolucao.class);
+        emprestimo.setDevolucao(devolucao);
         if (dto.getIdLeitor() != null) {
             Optional<Leitor> leitor = leitorService.getLeitorById(dto.getIdLeitor());
             if (!leitor.isPresent()) {

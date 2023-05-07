@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 @Service
 public class EmprestimoService {
     private EmprestimoRepository repository;
@@ -41,14 +42,17 @@ public class EmprestimoService {
         if (emprestimo.getLeitor() == null || emprestimo.getLeitor().equals("")) {
             throw new RegraNegocioException("Leitor inválido");
         }
-        if(emprestimo.getExemplar() == null || emprestimo.getExemplar().equals("")) {
+        if (emprestimo.getExemplar() == null || emprestimo.getExemplar().equals("")) {
             throw new RegraNegocioException("Exemplar inválido");
         }
-        if(emprestimo.getFuncionario() == null || emprestimo.getFuncionario().equals("")) {
+        if (emprestimo.getFuncionario() == null || emprestimo.getFuncionario().equals("")) {
             throw new RegraNegocioException("Funcionário inválido");
         }
-        if(emprestimo.getDataEmprestimo() == null) {
+        if (emprestimo.getDataEmprestimo() == null) {
             throw new RegraNegocioException("Data de empréstimo inválida");
+        }
+        if (emprestimo.getDevolucao() == null || emprestimo.getDevolucao().equals("")) {
+            throw new RegraNegocioException("Devolução inválida");
         }
     }
 }

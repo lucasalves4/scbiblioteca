@@ -42,10 +42,10 @@ public class RenovacaoService {
         if (renovacao.getQuantidadeDias() < 0) {
             throw new RegraNegocioException("Quantidade de dias não pode ser negativo");
         }
-        if(renovacao.getDataRenovacao() == null) {
-            throw new RegraNegocioException("Data inválida");
+        if (renovacao.getDataRenovacao() == null) {
+            throw new RegraNegocioException("Data de renovação inválida");
         }
-        if(renovacao.getEmprestimo() == null || renovacao.getEmprestimo().equals("")) {
+        if (renovacao.getEmprestimo() == null || renovacao.getEmprestimo().equals("")) {
             throw new RegraNegocioException("Empréstimo inválido");
         }
     }

@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Api("API de Renovações")
 
 
-public class RenovacaoController{
+public class RenovacaoController {
 
     private final RenovacaoService service;
     private final EmprestimoService emprestimoService;
@@ -48,6 +48,7 @@ public class RenovacaoController{
         List<Renovacao> renovacoes = service.getRenovacao();
         return ResponseEntity.ok(renovacoes.stream().map(RenovacaoDTO::create).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<Renovacao> renovacao = service.getRenovacaoById(id);

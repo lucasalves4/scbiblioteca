@@ -1,6 +1,7 @@
 package com.example.scbiblioteca.model.entity;
 
 import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Exemplar{
+public class Exemplar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,7 +25,7 @@ public class Exemplar{
     private String tipoAquisicao;
     private float valor;
     @ManyToOne
-    private Exemplar exemplar;
+    private Titulo titulo;
 }
 
 

@@ -13,7 +13,7 @@ public class ConfiguracaoDTO {
 
     private Long id;
 
-    private String prazoEntregaQuantDias;
+    private int prazoEntregaQuantDias;
 
     private float valorMulta;
 
@@ -22,8 +22,6 @@ public class ConfiguracaoDTO {
     private int quantMaximaEmprestimo;
 
     private boolean permiteReserva;
-
-    private Long idDocumento;
 
     public static ConfiguracaoDTO create(Configuracao configuracao) {
         ModelMapper modelMapper = new ModelMapper();

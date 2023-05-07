@@ -2,7 +2,9 @@ package com.example.scbiblioteca.api.controller;
 
 import com.example.scbiblioteca.api.dto.DocumentoDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
+import com.example.scbiblioteca.model.entity.Configuracao;
 import com.example.scbiblioteca.model.entity.Documento;
+import com.example.scbiblioteca.service.ConfiguracaoService;
 import com.example.scbiblioteca.service.DocumentoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,9 +26,10 @@ import java.util.stream.Collectors;
 @Api("API de Documentos")
 
 
-public class DocumentoController{
+public class DocumentoController {
 
     private final DocumentoService service;
+    private final ConfiguracaoService configuracaoService;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -53,6 +56,7 @@ public class DocumentoController{
         }
         return ResponseEntity.ok(documento.map(DocumentoDTO::create));
     }
+
     @PostMapping()
     @ApiOperation("Adiciona um novo documento")
     @ApiResponses({
@@ -68,12 +72,15 @@ public class DocumentoController{
     public ResponseEntity post(@RequestBody DocumentoDTO dto) {
         try {
             Documento documento = converter(dto);
+            Configuracao configuracao = configuracaoService.salvar(documento.getConfiguracao());
+            documento.setConfiguracao(configuracao);
             documento = service.salvar(documento);
             return new ResponseEntity(documento, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
     @PutMapping("{id}")
     @ApiOperation("Edita um documento")
     @ApiResponses({
@@ -93,6 +100,8 @@ public class DocumentoController{
         try {
             Documento documento = converter(dto);
             documento.setId(id);
+            Configuracao configuracao = configuracaoService.salvar(documento.getConfiguracao());
+            documento.setConfiguracao(configuracao);
             service.salvar(documento);
             return ResponseEntity.ok(documento);
         } catch (RegraNegocioException e) {
@@ -128,6 +137,8 @@ public class DocumentoController{
     public Documento converter(DocumentoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Documento documento = modelMapper.map(dto, Documento.class);
+        Configuracao configuracao = modelMapper.map(dto, Configuracao.class);
+        documento.setConfiguracao(configuracao);
         return documento;
     }
 

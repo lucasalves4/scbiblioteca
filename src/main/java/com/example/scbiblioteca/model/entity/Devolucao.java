@@ -22,8 +22,6 @@ public class Devolucao{
 
     private Date dataDevolucao;
 
-    @ManyToOne
-    private Emprestimo emprestimo;
 }
 
 

@@ -38,15 +38,9 @@ public class DevolucaoService {
         repository.delete(devolucao);
     }
 
-    //validar função posteriormente, era assim:
-    // public void validar(Devolucao devolucao) {
-    //        if (devolucao.getDataDevolucao().trim().equals("00/00/00")) {
-    //            throw new RegraNegocioException("Data inválida");
-    //        }
-
     public void validar(Devolucao devolucao) {
-        if (devolucao.getDataDevolucao().equals("00/00/00")) {
-            throw new RegraNegocioException("Data inválida");
+        if (devolucao.getDataDevolucao() == null) {
+            throw new RegraNegocioException("Data de devolução inválida");
         }
     }
 }

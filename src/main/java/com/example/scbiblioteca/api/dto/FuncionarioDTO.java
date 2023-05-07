@@ -26,7 +26,7 @@ public class FuncionarioDTO {
     public static FuncionarioDTO create(Funcionario funcionario) {
         ModelMapper modelMapper = new ModelMapper();
         FuncionarioDTO dto = modelMapper.map(funcionario, FuncionarioDTO.class);
-        dto.nome= funcionario.getNome();
+        dto.nome = funcionario.getNome();
         dto.sexo = funcionario.getSexo();
         dto.telefone = funcionario.getTelefone();
         dto.email = funcionario.getEmail();

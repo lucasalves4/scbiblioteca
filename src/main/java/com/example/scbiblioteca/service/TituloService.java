@@ -72,5 +72,11 @@ public class TituloService {
         if(titulo.getTotalPaginas() <= 0) {
             throw new RegraNegocioException("Total de páginas inválido");
         }
+        if (titulo.getDocumento() == null || titulo.getDocumento().equals("")) {
+            throw new RegraNegocioException("Documento inválido");
+        }
+        if (titulo.getAutor() == null || titulo.getAutor().equals("")) {
+            throw new RegraNegocioException("Autor inválido");
+        }
     }
 }
