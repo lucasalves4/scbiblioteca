@@ -45,6 +45,9 @@ public class ReservaService {
         if (reserva.getFuncionario() == null || reserva.getFuncionario().equals("")) {
             throw new RegraNegocioException("Funcionário inválido");
         }
+        if (reserva.getLeitor() == null || reserva.getLeitor().equals("")) {
+            throw new RegraNegocioException("Leitor inválido");
+        }
         if (reserva.getDataReserva() == null) {
             throw new RegraNegocioException("Data inválida");
         }

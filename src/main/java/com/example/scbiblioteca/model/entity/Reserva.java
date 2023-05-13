@@ -23,6 +23,8 @@ public class Reserva{
     @ManyToOne
     private Funcionario funcionario;
     @ManyToOne
+    private Leitor leitor;
+    @ManyToOne
     private Exemplar exemplar;
 
 }
