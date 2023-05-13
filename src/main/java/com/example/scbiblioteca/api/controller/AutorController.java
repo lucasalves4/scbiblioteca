@@ -74,6 +74,7 @@ public class AutorController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
     @PutMapping("{id}")
     @ApiOperation("Edita um autor")
     @ApiResponses({

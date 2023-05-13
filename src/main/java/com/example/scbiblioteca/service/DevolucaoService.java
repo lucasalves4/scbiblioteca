@@ -39,8 +39,8 @@ public class DevolucaoService {
     }
 
     public void validar(Devolucao devolucao) {
-        if (devolucao.getDataDevolucao().trim().equals("00/00/00")) {
-            throw new RegraNegocioException("Data inválida");
+        if (devolucao.getDataDevolucao() == null) {
+            throw new RegraNegocioException("Data de devolução inválida");
         }
     }
 }

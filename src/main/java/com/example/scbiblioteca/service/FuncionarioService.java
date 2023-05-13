@@ -42,13 +42,13 @@ public class FuncionarioService {
         if (funcionario.getNome() == null || funcionario.getNome().trim().equals("")) {
             throw new RegraNegocioException("Nome inválido");
         }
-        if(funcionario.getSexo() == null || funcionario.getSexo().trim().equals("")) {
+        if (funcionario.getSexo() == null || funcionario.getSexo().trim().equals("")) {
             throw new RegraNegocioException("Sexo inválido");
         }
-        if(funcionario.getTelefone() == null || funcionario.getTelefone().trim().equals("")) {
+        if (funcionario.getTelefone() == null || funcionario.getTelefone().trim().equals("")) {
             throw new RegraNegocioException("Telefone inválido");
         }
-        if(funcionario.getEmail() == null || funcionario.getEmail().trim().equals("")) {
+        if (funcionario.getEmail() == null || funcionario.getEmail().trim().equals("")) {
             throw new RegraNegocioException("E-mail inválido");
         }
     }

@@ -36,6 +36,7 @@ public class DevolucaoController {
         List<Devolucao> devolucoes = service.getDevolucao();
         return ResponseEntity.ok(devolucoes.stream().map(DevolucaoDTO::create).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     @ApiOperation("Obter detalhes de um devolução")
     @ApiResponses({
@@ -132,14 +133,6 @@ public class DevolucaoController {
     public Devolucao converter(DevolucaoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Devolucao devolucao = modelMapper.map(dto, Devolucao.class);
-        if (dto.getIdEmprestimo() != null) {
-            Optional<Emprestimo> emprestimo = emprestimoService.getEmprestimoById(dto.getIdEmprestimo());
-            if (!emprestimo.isPresent()) {
-                devolucao.setEmprestimo(null);
-            } else {
-                devolucao.setEmprestimo(emprestimo.get());
-            }
-        }
         return devolucao;
     }
 

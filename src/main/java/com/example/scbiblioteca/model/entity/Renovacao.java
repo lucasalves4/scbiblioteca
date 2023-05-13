@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class Renovacao{
 
     private int quantidadeDias;
 
-    private String dataRenovacao;
+    private Date dataRenovacao;
 
     @ManyToOne
     private Emprestimo emprestimo;

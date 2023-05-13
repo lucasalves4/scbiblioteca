@@ -17,7 +17,7 @@ public class Configuracao{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String prazoEntregaQuantDias;
+    private int prazoEntregaQuantDias;
 
     private float valorMulta;
 
@@ -27,7 +27,5 @@ public class Configuracao{
 
     private boolean permiteReserva;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Documento documento;
 }
 

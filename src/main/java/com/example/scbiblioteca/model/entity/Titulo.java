@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -26,7 +28,7 @@ public class Titulo{
     private String notaSerie;
     private String cidadePublicacao;
     private String editora;
-    private String dataPublicacao;
+    private Date dataPublicacao;
     private String idioma;
     @ManyToOne
     private Documento documento;

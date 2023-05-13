@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Api("API de Funcionários")
 
 
-public class FuncionarioController{
+public class FuncionarioController {
 
     private final FuncionarioService service;
     private final EnderecoService enderecoService;
@@ -36,6 +36,7 @@ public class FuncionarioController{
         List<Funcionario> funcionarios = service.getFuncionario();
         return ResponseEntity.ok(funcionarios.stream().map(FuncionarioDTO::create).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     @ApiOperation("Obter detalhes de um Funcionário")
     @ApiResponses({
@@ -79,6 +80,7 @@ public class FuncionarioController{
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
     @PutMapping("{id}")
     @ApiOperation("Edita um funcionário")
     @ApiResponses({

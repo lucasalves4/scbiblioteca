@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Api("API de Leitores")
 
 
-public class LeitorController{
+public class LeitorController {
 
     private final LeitorService service;
     private final EnderecoService enderecoService;
@@ -36,6 +36,7 @@ public class LeitorController{
         List<Leitor> leitores = service.getLeitor();
         return ResponseEntity.ok(leitores.stream().map(LeitorDTO::create).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     @ApiOperation("Obter detalhes de um Leitores")
     @ApiResponses({
@@ -80,6 +81,7 @@ public class LeitorController{
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
     @PutMapping("{id}")
     @ApiOperation("Edita um leitor")
     @ApiResponses({

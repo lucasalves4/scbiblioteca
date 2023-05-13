@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -18,10 +20,8 @@ public class Devolucao{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String dataDevolucao;
+    private Date dataDevolucao;
 
-    @ManyToOne
-    private Emprestimo emprestimo;
 }
 
 

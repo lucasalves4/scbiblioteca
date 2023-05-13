@@ -6,15 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExemplarDTO {
     private Long id;
     private int numeroTombo;
-    private String dataAquisicao;
+    private Date dataAquisicao;
     private String tipoAquisicao;
     private float valor;
+    private Long idTitulo;
 
     public static ExemplarDTO create(Exemplar exemplar) {
         ModelMapper modelMapper = new ModelMapper();

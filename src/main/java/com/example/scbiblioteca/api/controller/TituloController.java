@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Api("API de Títulos")
 
 
-public class TituloController{
+public class TituloController {
 
     private final TituloService service;
     private final DocumentoService documentoService;

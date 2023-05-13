@@ -1,9 +1,7 @@
 package com.example.scbiblioteca.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +19,8 @@ public class Documento{
     private Long id;
 
     private String tipoDocumento;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Configuracao configuracao;
 
 }
 

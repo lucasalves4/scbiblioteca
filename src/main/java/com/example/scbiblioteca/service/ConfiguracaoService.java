@@ -38,8 +38,8 @@ public class ConfiguracaoService {
     }
 
     public void validar(Configuracao configuracao) {
-        if (configuracao.getPrazoEntregaQuantDias() == null || configuracao.getPrazoEntregaQuantDias().trim().equals("")) {
-            throw new RegraNegocioException("Prazo de entrega inserido inválido");
+        if (configuracao.getPrazoEntregaQuantDias() <= 0) {
+            throw new RegraNegocioException("Prazo de entrega não pode ser menor que zero");
         }
         if (configuracao.getValorMulta() < 0) {
             throw new RegraNegocioException("Valor de multa não pode ser negativo");

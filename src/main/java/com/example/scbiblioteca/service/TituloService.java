@@ -57,7 +57,7 @@ public class TituloService {
         if(titulo.getEditora() == null || titulo.getEditora().trim().equals("")) {
             throw new RegraNegocioException("Editora inválida");
         }
-        if(titulo.getDataPublicacao() == null || titulo.getDataPublicacao().trim().equals("")) {
+        if(titulo.getDataPublicacao() == null) {
             throw new RegraNegocioException("Data de publicação inválida");
         }
         if(titulo.getIdioma() == null || titulo.getIdioma().trim().equals("")) {
@@ -71,6 +71,12 @@ public class TituloService {
         }
         if(titulo.getTotalPaginas() <= 0) {
             throw new RegraNegocioException("Total de páginas inválido");
+        }
+        if (titulo.getDocumento() == null || titulo.getDocumento().equals("")) {
+            throw new RegraNegocioException("Documento inválido");
+        }
+        if (titulo.getAutor() == null || titulo.getAutor().equals("")) {
+            throw new RegraNegocioException("Autor inválido");
         }
     }
 }

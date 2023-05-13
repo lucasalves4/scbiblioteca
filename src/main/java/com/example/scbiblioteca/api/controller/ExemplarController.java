@@ -3,9 +3,12 @@ package com.example.scbiblioteca.api.controller;
 import com.example.scbiblioteca.api.dto.ExemplarDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Exemplar;
+import com.example.scbiblioteca.model.entity.Leitor;
+import com.example.scbiblioteca.model.entity.Titulo;
 import com.example.scbiblioteca.service.EmprestimoService;
 import com.example.scbiblioteca.service.ExemplarService;
 import com.example.scbiblioteca.service.ReservaService;
+import com.example.scbiblioteca.service.TituloService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,11 +29,10 @@ import java.util.stream.Collectors;
 @Api("API de Exemplares")
 
 
-public class ExemplarController{
+public class ExemplarController {
 
     private final ExemplarService service;
-    private final EmprestimoService emprestimoService;
-    private final ReservaService reservaService;
+    private final TituloService tituloService;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -134,6 +136,14 @@ public class ExemplarController{
     public Exemplar converter(ExemplarDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Exemplar exemplar = modelMapper.map(dto, Exemplar.class);
+        if (dto.getIdTitulo() != null) {
+            Optional<Titulo> titulo = tituloService.getTituloById(dto.getIdTitulo());
+            if (!titulo.isPresent()) {
+                exemplar.setTitulo(null);
+            } else {
+                exemplar.setTitulo(titulo.get());
+            }
+        }
         return exemplar;
     }
 }

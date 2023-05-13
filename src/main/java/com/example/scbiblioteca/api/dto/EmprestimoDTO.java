@@ -6,11 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmprestimoDTO {
     private Long id;
+    private Date dataEmprestimo;
+    private Date dataDevolucao;
     private Long idLeitor;
     private Long idFuncionario;
     private Long idExemplar;
@@ -18,6 +22,8 @@ public class EmprestimoDTO {
     public static EmprestimoDTO create(Emprestimo emprestimo) {
         ModelMapper modelMapper = new ModelMapper();
         EmprestimoDTO dto = modelMapper.map(emprestimo, EmprestimoDTO.class);
+        dto.dataEmprestimo = emprestimo.getDataEmprestimo();
+        dto.dataDevolucao = emprestimo.getDevolucao().getDataDevolucao();
         return dto;
     }
 }

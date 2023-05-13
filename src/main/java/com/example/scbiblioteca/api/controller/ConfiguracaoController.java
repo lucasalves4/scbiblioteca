@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Api("API de Confurações")
 
-public class ConfiguracaoController{
+public class ConfiguracaoController {
 
     private final ConfiguracaoService service;
     private final DocumentoService documentoService;
@@ -132,14 +132,6 @@ public class ConfiguracaoController{
     public Configuracao converter(ConfiguracaoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Configuracao configuracao = modelMapper.map(dto, Configuracao.class);
-        if (dto.getIdDocumento() != null) {
-            Optional<Documento> documento = documentoService.getDocumentoById(dto.getIdDocumento());
-            if (!documento.isPresent()) {
-                configuracao.setDocumento(null);
-            } else {
-                configuracao.setDocumento(documento.get());
-            }
-        }
         return configuracao;
     }
 

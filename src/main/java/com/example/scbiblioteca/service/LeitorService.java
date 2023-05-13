@@ -42,13 +42,13 @@ public class LeitorService {
         if (leitor.getNome() == null || leitor.getNome().trim().equals("")) {
             throw new RegraNegocioException("Nome inválido");
         }
-        if(leitor.getSexo() == null || leitor.getSexo().trim().equals("")) {
+        if (leitor.getSexo() == null || leitor.getSexo().trim().equals("")) {
             throw new RegraNegocioException("Sexo inválido");
         }
-        if(leitor.getTelefone() == null || leitor.getTelefone().trim().equals("")) {
+        if (leitor.getTelefone() == null || leitor.getTelefone().trim().equals("")) {
             throw new RegraNegocioException("Telefone inválido");
         }
-        if(leitor.getEmail() == null || leitor.getEmail().trim().equals("")) {
+        if (leitor.getEmail() == null || leitor.getEmail().trim().equals("")) {
             throw new RegraNegocioException("E-mail inválido");
         }
     }

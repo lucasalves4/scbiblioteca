@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,7 +15,7 @@ public class RenovacaoDTO {
 
     private Long id;
     private int quantidadeDias;
-    private String dataRenovacao;
+    private Date dataRenovacao;
     private Long idEmprestimo;
 
     public static RenovacaoDTO create(Renovacao renovacao) {
