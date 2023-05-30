@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/autores")
 @RequiredArgsConstructor
 @Api("API de Autores")
+@CrossOrigin
 
 public class AutorController {
 

@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/configuracoes")
 @RequiredArgsConstructor
 @Api("API de Confurações")
+@CrossOrigin
 
 public class ConfiguracaoController {
 

@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/exemplares")
 @RequiredArgsConstructor
 @Api("API de Exemplares")
+@CrossOrigin
 
 
 public class ExemplarController {

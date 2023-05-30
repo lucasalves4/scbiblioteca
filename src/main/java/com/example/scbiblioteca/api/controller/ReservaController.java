@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/reservas")
 @RequiredArgsConstructor
 @Api("API de Reservas")
+@CrossOrigin
 
 
 public class ReservaController {

@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/documentos")
 @RequiredArgsConstructor
 @Api("API de Documentos")
+@CrossOrigin
 
 
 public class DocumentoController {

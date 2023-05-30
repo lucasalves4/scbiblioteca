@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/devolucoes")
 @RequiredArgsConstructor
 @Api("API de Devoluções")
+@CrossOrigin
 
 
 public class DevolucaoController {

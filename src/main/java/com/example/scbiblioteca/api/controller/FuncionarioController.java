@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/funcionarios")
 @RequiredArgsConstructor
 @Api("API de Funcionários")
+@CrossOrigin
 
 
 public class FuncionarioController {
