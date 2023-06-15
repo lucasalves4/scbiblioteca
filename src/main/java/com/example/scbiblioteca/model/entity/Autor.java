@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 public class Autor {
- //teste
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
