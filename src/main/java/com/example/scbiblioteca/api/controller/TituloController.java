@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/titulos")
 @RequiredArgsConstructor
 @Api("API de Títulos")
+@CrossOrigin
 
 
 public class TituloController {

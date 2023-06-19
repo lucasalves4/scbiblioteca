@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/emprestimos")
 @RequiredArgsConstructor
 @Api("API de Empréstimos")
+@CrossOrigin
 
 
 public class EmprestimoController {

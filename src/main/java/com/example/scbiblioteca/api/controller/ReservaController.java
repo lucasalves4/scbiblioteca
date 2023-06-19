@@ -4,9 +4,11 @@ import com.example.scbiblioteca.api.dto.ReservaDTO;
 import com.example.scbiblioteca.exception.RegraNegocioException;
 import com.example.scbiblioteca.model.entity.Exemplar;
 import com.example.scbiblioteca.model.entity.Funcionario;
+import com.example.scbiblioteca.model.entity.Leitor;
 import com.example.scbiblioteca.model.entity.Reserva;
 import com.example.scbiblioteca.service.ExemplarService;
 import com.example.scbiblioteca.service.FuncionarioService;
+import com.example.scbiblioteca.service.LeitorService;
 import com.example.scbiblioteca.service.ReservaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,12 +28,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/reservas")
 @RequiredArgsConstructor
 @Api("API de Reservas")
+@CrossOrigin
 
 
 public class ReservaController {
 
     private final ReservaService service;
     private final FuncionarioService funcionarioService;
+    private final LeitorService leitorService;
     private final ExemplarService exemplarService;
 
     @GetMapping()
@@ -144,6 +148,14 @@ public class ReservaController {
                 reserva.setFuncionario(null);
             } else {
                 reserva.setFuncionario(funcionario.get());
+            }
+        }
+        if (dto.getIdLeitor() != null) {
+            Optional<Leitor> leitor = leitorService.getLeitorById(dto.getIdLeitor());
+            if (!leitor.isPresent()) {
+                reserva.setLeitor(null);
+            } else {
+                reserva.setLeitor(leitor.get());
             }
         }
         if (dto.getIdExemplar() != null) {

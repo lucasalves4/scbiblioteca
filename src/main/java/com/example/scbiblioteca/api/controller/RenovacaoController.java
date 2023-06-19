@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/renovacoes")
 @RequiredArgsConstructor
 @Api("API de Renovações")
+@CrossOrigin
 
 
 public class RenovacaoController {

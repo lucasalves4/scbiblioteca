@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/leitores")
 @RequiredArgsConstructor
 @Api("API de Leitores")
+@CrossOrigin
 
 
 public class LeitorController {

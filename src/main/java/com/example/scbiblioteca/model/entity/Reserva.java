@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -17,8 +19,11 @@ public class Reserva{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Date dataReserva;
     @ManyToOne
     private Funcionario funcionario;
+    @ManyToOne
+    private Leitor leitor;
     @ManyToOne
     private Exemplar exemplar;
 
