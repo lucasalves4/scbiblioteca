@@ -1,7 +1,7 @@
 package com.example.scbiblioteca.config;
 
-//import com.example.scbiblioteca.security.JwtAuthFilter;
-//import com.example.scbiblioteca.security.JwtService;
+import com.example.scbiblioteca.security.JwtAuthFilter;
+import com.example.scbiblioteca.security.JwtService;
 
 import com.example.scbiblioteca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +24,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UsuarioService usuarioService;
 
-//    @Autowired
-//    private JwtService jwtService;
+    @Autowired
+    private JwtService jwtService;
 
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public OncePerRequestFilter jwtFilter() {
-//        return new JwtAuthFilter(jwtService, usuarioService);
-//    }
+    @Bean
+    public OncePerRequestFilter jwtFilter() {
+        return new JwtAuthFilter(jwtService, usuarioService);
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -48,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .cors()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/api/v1/autores/**")
                 .hasAnyRole("USER", "ADMIN")
@@ -78,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-//                .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
         ;
     }
 

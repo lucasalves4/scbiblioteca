@@ -5,7 +5,7 @@ import com.example.scbiblioteca.api.dto.TokenDTO;
 
 import com.example.scbiblioteca.exception.SenhaInvalidaException;
 import com.example.scbiblioteca.model.entity.Usuario;
-//import com.example.scbiblioteca.security.JwtService;
+import com.example.scbiblioteca.security.JwtService;
 import com.example.scbiblioteca.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,27 +22,34 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;
-//    private final JwtService jwtService;
+    private final JwtService jwtService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Usuario salvar(@RequestBody Usuario usuario) {
         String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
         usuario.setSenha(senhaCriptografada);
+        System.out.println(usuario.isAdmin());
         return usuarioService.salvar(usuario);
     }
 
     @PostMapping("/auth")
-    public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais){
-        try{
+    public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais) {
+        try {
             Usuario usuario = Usuario.builder()
                     .login(credenciais.getLogin())
                     .senha(credenciais.getSenha()).build();
             UserDetails usuarioAutenticado = usuarioService.autenticar(usuario);
-//            String token = jwtService.gerarToken(usuario);
+            String token = jwtService.gerarToken(usuario);
 
-            return new TokenDTO(usuario.getLogin());
-        } catch (UsernameNotFoundException | SenhaInvalidaException e ){
+            String rule = usuarioAutenticado
+                    .getAuthorities()
+                    .toArray()[0]
+                    .toString()
+                    .equals("ROLE_ADMIN") ? "manager" : "employee";
+
+            return new TokenDTO(usuario.getLogin(), token, rule);
+        } catch (UsernameNotFoundException | SenhaInvalidaException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
