@@ -39,44 +39,44 @@ public class TituloService {
     }
 
     public void validar(Titulo titulo) {
-        if (titulo.getTitulo() == null || titulo.getTitulo().trim().equals("")) {
-            throw new RegraNegocioException("Titulo inválido");
-        }
-        if(titulo.getSubtitulo() == null || titulo.getSubtitulo().trim().equals("")) {
-            throw new RegraNegocioException("Subtitulo inválido");
-        }
-        if(titulo.getArea() == null || titulo.getArea().trim().equals("")) {
-            throw new RegraNegocioException("Área inválida");
-        }
-        if(titulo.getNotaSerie() == null || titulo.getNotaSerie().trim().equals("")) {
-            throw new RegraNegocioException("Nota da série inválida");
-        }
-        if(titulo.getCidadePublicacao() == null || titulo.getCidadePublicacao().trim().equals("")) {
-            throw new RegraNegocioException("Cidade de publicação inválida");
-        }
-        if(titulo.getEditora() == null || titulo.getEditora().trim().equals("")) {
-            throw new RegraNegocioException("Editora inválida");
-        }
-        if(titulo.getDataPublicacao() == null) {
-            throw new RegraNegocioException("Data de publicação inválida");
-        }
-        if(titulo.getIdioma() == null || titulo.getIdioma().trim().equals("")) {
-            throw new RegraNegocioException("Idioma inválido");
-        }
-        if(titulo.getCodClassificacao() <= 0) {
-            throw new RegraNegocioException("Código de classificação inválido");
-        }
-        if(titulo.getEdicao() <= 0) {
-            throw new RegraNegocioException("Edição inválida");
-        }
-        if(titulo.getTotalPaginas() <= 0) {
-            throw new RegraNegocioException("Total de páginas inválido");
-        }
-        if (titulo.getDocumento() == null || titulo.getDocumento().equals("")) {
-            throw new RegraNegocioException("Documento inválido");
-        }
-        if (titulo.getAutor() == null || titulo.getAutor().equals("")) {
-            throw new RegraNegocioException("Autor inválido");
-        }
+//        if (titulo.getTitulo() == null || titulo.getTitulo().trim().equals("")) {
+//            throw new RegraNegocioException("Titulo inválido");
+//        }
+//        if(titulo.getSubtitulo() == null || titulo.getSubtitulo().trim().equals("")) {
+//            throw new RegraNegocioException("Subtitulo inválido");
+//        }
+//        if(titulo.getArea() == null || titulo.getArea().trim().equals("")) {
+//            throw new RegraNegocioException("Área inválida");
+//        }
+//        if(titulo.getNotaSerie() == null || titulo.getNotaSerie().trim().equals("")) {
+//            throw new RegraNegocioException("Nota da série inválida");
+//        }
+//        if(titulo.getCidadePublicacao() == null || titulo.getCidadePublicacao().trim().equals("")) {
+//            throw new RegraNegocioException("Cidade de publicação inválida");
+//        }
+//        if(titulo.getEditora() == null || titulo.getEditora().trim().equals("")) {
+//            throw new RegraNegocioException("Editora inválida");
+//        }
+//        if(titulo.getDataPublicacao() == null) {
+//            throw new RegraNegocioException("Data de publicação inválida");
+//        }
+//        if(titulo.getIdioma() == null || titulo.getIdioma().trim().equals("")) {
+//            throw new RegraNegocioException("Idioma inválido");
+//        }
+//        if(titulo.getCodClassificacao() <= 0) {
+//            throw new RegraNegocioException("Código de classificação inválido");
+//        }
+//        if(titulo.getEdicao() <= 0) {
+//            throw new RegraNegocioException("Edição inválida");
+//        }
+//        if(titulo.getTotalPaginas() <= 0) {
+//            throw new RegraNegocioException("Total de páginas inválido");
+//        }
+//        if (titulo.getDocumento() == null || titulo.getDocumento().equals("")) {
+//            throw new RegraNegocioException("Documento inválido");
+//        }
+//        if (titulo.getAutor() == null || titulo.getAutor().equals("")) {
+//            throw new RegraNegocioException("Autor inválido");
+//        }
     }
 }

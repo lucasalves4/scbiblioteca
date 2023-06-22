@@ -39,20 +39,20 @@ public class ExemplarService {
     }
 
     public void validar(Exemplar exemplar) {
-        if (exemplar.getNumeroTombo() <= 0) {
-            throw new RegraNegocioException("Número de tombo não pode ser menor ou igual a zero");
-        }
-        if (exemplar.getTipoAquisicao() == null || exemplar.getTipoAquisicao().trim().equals("")) {
-            throw new RegraNegocioException("Tipo de Aquisição inválido");
-        }
-        if (exemplar.getValor() < 0) {
-            throw new RegraNegocioException("Valor não pode ser menor que a zero");
-        }
-        if (exemplar.getDataAquisicao() == null) {
-            throw new RegraNegocioException("Data de aquisição inválida");
-        }
-        if (exemplar.getTitulo() == null || exemplar.getTitulo().equals("")) {
-            throw new RegraNegocioException("Titulo inválido");
-        }
+//        if (exemplar.getNumeroTombo() <= 0) {
+//            throw new RegraNegocioException("Número de tombo não pode ser menor ou igual a zero");
+//        }
+//        if (exemplar.getTipoAquisicao() == null || exemplar.getTipoAquisicao().trim().equals("")) {
+//            throw new RegraNegocioException("Tipo de Aquisição inválido");
+//        }
+//        if (exemplar.getValor() < 0) {
+//            throw new RegraNegocioException("Valor não pode ser menor que a zero");
+//        }
+//        if (exemplar.getDataAquisicao() == null) {
+//            throw new RegraNegocioException("Data de aquisição inválida");
+//        }
+//        if (exemplar.getTitulo() == null || exemplar.getTitulo().equals("")) {
+//            throw new RegraNegocioException("Titulo inválido");
+//        }
     }
 }
