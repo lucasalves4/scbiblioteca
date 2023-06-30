@@ -40,11 +40,11 @@ public class DocumentoService {
     }
 
     public void validar(Documento documento) {
-        if (documento.getTipoDocumento() == null || documento.getTipoDocumento().trim().equals("")) {
-            throw new RegraNegocioException("Tipo de Documento inválido");
-        }
-        if (documento.getConfiguracao() == null || documento.getConfiguracao().equals("")) {
-            throw new RegraNegocioException("Configuração inválida");
-        }
+//        if (documento.getTipoDocumento() == null || documento.getTipoDocumento().trim().equals("")) {
+//            throw new RegraNegocioException("Tipo de Documento inválido");
+//        }
+//        if (documento.getConfiguracao() == null || documento.getConfiguracao().equals("")) {
+//            throw new RegraNegocioException("Configuração inválida");
+//        }
     }
 }

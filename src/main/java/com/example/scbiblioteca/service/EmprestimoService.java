@@ -39,20 +39,20 @@ public class EmprestimoService {
     }
 
     public void validar(Emprestimo emprestimo) {
-        if (emprestimo.getLeitor() == null || emprestimo.getLeitor().equals("")) {
-            throw new RegraNegocioException("Leitor inválido");
-        }
-        if (emprestimo.getExemplar() == null || emprestimo.getExemplar().equals("")) {
-            throw new RegraNegocioException("Exemplar inválido");
-        }
-        if (emprestimo.getFuncionario() == null || emprestimo.getFuncionario().equals("")) {
-            throw new RegraNegocioException("Funcionário inválido");
-        }
-        if (emprestimo.getDataEmprestimo() == null) {
-            throw new RegraNegocioException("Data de empréstimo inválida");
-        }
-        if (emprestimo.getDevolucao() == null || emprestimo.getDevolucao().equals("")) {
-            throw new RegraNegocioException("Devolução inválida");
-        }
+//        if (emprestimo.getLeitor() == null || emprestimo.getLeitor().equals("")) {
+//            throw new RegraNegocioException("Leitor inválido");
+//        }
+//        if (emprestimo.getExemplar() == null || emprestimo.getExemplar().equals("")) {
+//            throw new RegraNegocioException("Exemplar inválido");
+//        }
+//        if (emprestimo.getFuncionario() == null || emprestimo.getFuncionario().equals("")) {
+//            throw new RegraNegocioException("Funcionário inválido");
+//        }
+//        if (emprestimo.getDataEmprestimo() == null) {
+//            throw new RegraNegocioException("Data de empréstimo inválida");
+//        }
+//        if (emprestimo.getDevolucao() == null || emprestimo.getDevolucao().equals("")) {
+//            throw new RegraNegocioException("Devolução inválida");
+//        }
     }
 }
